@@ -7,7 +7,9 @@ const io = require('socket.io')(servidorHttp);
 
 io.addListener('connection', (socket) => {
     console.log('Um usuário conectou')
-    
+    socket.addListener('nova mensagem', (msg) => {
+        io.emit('nova mensagem', msg)
+    })
 })
 
 aplicacao.use(express.static('public'))
